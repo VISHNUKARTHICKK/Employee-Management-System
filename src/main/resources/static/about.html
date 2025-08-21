@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>About Us - Voxa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    section {
+      padding: 40px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    p {
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    .team {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+    .member {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      width: 250px;
+      margin: 10px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 30px;
+    }
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>About Voxa</h1>
+</header>
+
+<section>
+  <h2>Who We Are</h2>
+  <p>
+    Voxa is an innovative company focused on building modern employee management solutions.
+    Our mission is to simplify HR processes, make workforce management easier, and help companies
+    grow with confidence.
+  </p>
+
+  <h2>What We Do</h2>
+  <p>
+    We provide tools for adding, updating, viewing, and managing employees in an efficient way.
+    Voxa’s Employee Management System is designed with simplicity and scalability in mind.
+  </p>
+
+  <h2>Our Team</h2>
+  <div class="team">
+    <div class="member">
+      <img src="vishnu.jpg" alt="Team Member">
+      <h3>Vishnu Karthick</h3>
+      <p>Founder & Fullstack Developer</p>
+    </div>
+    <div class="member">
+      <img src="backenddev.png" alt="Team Member">
+      <h3>John Doe</h3>
+      <p>Backend Engineer</p>
+    </div>
+    <div class="member">
+      <img src="frontenddev.png" alt="Team Member">
+      <h3>Dhanya</h3>
+      <p>Frontend Engineer</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Voxa. All Rights Reserved. | <a href="/">Home</a></p>
+</footer>
+
+</body>
+</html>

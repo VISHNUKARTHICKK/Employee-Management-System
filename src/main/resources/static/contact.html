@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us - Voxa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    section {
+      padding: 40px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      color: #2c3e50;
+    }
+    .contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+    .contact-form, .contact-info {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      width: 45%;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    form button {
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #34495e;
+    }
+    footer {
+      background-color: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 30px;
+    }
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+    @media (max-width: 768px) {
+      .contact-form, .contact-info {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header >
+  <h1>Contact Voxa</h1>
+</header>
+
+<section>
+  <h2>Get in Touch</h2>
+  <p>If you have any questions, feedback, or support requests, feel free to reach out to us using the form below.</p>
+
+  <div class="contact-container">
+    
+    <!-- Contact Form -->
+    <div class="contact-form">
+      <h3>Send Us a Message</h3>
+      <form action="/" method="get">
+        <label>Your Name</label>
+        <input type="text" name="name" required>
+
+        <label>Email</label>
+        <input type="email" name="email" required>
+
+        <label>Message</label>
+        <textarea name="message" rows="5" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="contact-info">
+      <h3>Our Office</h3>
+      <p><strong>Voxa Technologies</strong><br>
+      123 Business Street,<br>
+      Chennai, Tamil Nadu, India</p>
+
+      <p><strong>Email:</strong> support@voxa.com<br>
+      <strong>Phone:</strong> +91 98765 43210</p>
+
+      <p>Follow us on:  
+        <a href="#">LinkedIn</a> |  
+        <a href="#">Twitter</a> |  
+        <a href="#">Facebook</a>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Voxa. All Rights Reserved. | <a href="/">Home</a></p>
+</footer>
+
+</body>
+</html>
