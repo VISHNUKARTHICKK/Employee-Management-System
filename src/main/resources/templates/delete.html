@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Employee List - VOXA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- For responsiveness -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         body { background-color: #f4f6f9; font-family: 'Segoe UI', sans-serif; }
-        .container { margin-top: 50px; }
+        .container { margin-top: 40px; }
         .card { border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .btn-add {
             background-color: #3949ab;
@@ -18,11 +19,35 @@
             background-color: #283593;
             color: #fff;
         }
-        .auto-hide { animation: fadeOut 2s forwards; }
+        .auto-hide { animation: fadeOut 2s forwards; animation-delay: 2s; }
         @keyframes fadeOut {
             0% { opacity: 1; }
             70% { opacity: 1; }
             100% { opacity: 0; display: none; }
+        }
+        /* Mobile-specific tweaks */
+        @media (max-width: 768px) {
+            table thead { display: none; }  /* Hide table headers */
+            table tbody tr { 
+                display: block; 
+                margin-bottom: 1rem; 
+                border: 1px solid #ddd; 
+                border-radius: 10px;
+                padding: 10px;
+                background: #fff;
+            }
+            table tbody td {
+                display: flex;
+                justify-content: space-between;
+                padding: 6px 10px;
+                font-size: 0.9rem;
+            }
+            table tbody td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: #3949ab;
+            }
+            .btn-sm { padding: 4px 10px; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -30,51 +55,54 @@
 
 <div class="container">
     <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-4 gap-2">
         <h2 class="fw-bold">Employee List</h2>
-        <a href="/employees" class="btn btn-add"> Back </a>
+        <a href="/employees" class="btn btn-add w-100 w-sm-auto">Back</a>
     </div>
+
     <div th:if="${pass}" class="alert alert-danger text-center auto-hide" role="alert">
         <span th:text="${pass}"></span>
     </div>
 
     <!-- Employee Table -->
-    <div class="card p-4">
-        <table class="table table-hover align-middle">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Mobile</th>
-                    <th>Department</th>
-                    <th>Address</th>
-                    <th>Salary</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Loop through employees -->
-                <tr th:each="employee : ${employeesdetails}">
-                    <td th:text="${employee.id}"></td>
-                    <td th:text="${employee.name}"></td>
-                    <td th:text="${employee.email}"></td>
-                    <td th:text="${employee.mobile}"></td>
-                    <td th:text="${employee.department}"></td>
-                    <td th:text="${employee.address}"></td>
-                    <td th:text="${employee.salary}"></td>
-                    <td class="text-center">
-                        <!-- Delete button triggers modal -->
-                        <button class="btn btn-sm btn-danger"
-                                data-bs-toggle="modal"
-                                data-bs-target="#confirmDeleteModal"
-                                th:attr="data-id=${employee.id},data-name=${employee.name}">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="card p-3 p-sm-4">
+        <div class="table-responsive"> <!-- Makes table scrollable on small screens -->
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Department</th>
+                        <th>Address</th>
+                        <th>Salary</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through employees -->
+                    <tr th:each="employee : ${employeesdetails}">
+                        <td data-label="ID" th:text="${employee.id}"></td>
+                        <td data-label="Name" th:text="${employee.name}"></td>
+                        <td data-label="Email" th:text="${employee.email}"></td>
+                        <td data-label="Mobile" th:text="${employee.mobile}"></td>
+                        <td data-label="Department" th:text="${employee.department}"></td>
+                        <td data-label="Address" th:text="${employee.address}"></td>
+                        <td data-label="Salary" th:text="${employee.salary}"></td>
+                        <td data-label="Action" class="text-center">
+                            <!-- Delete button triggers modal -->
+                            <button class="btn btn-sm btn-danger"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#confirmDeleteModal"
+                                    th:attr="data-id=${employee.id},data-name=${employee.name}">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -101,17 +129,14 @@
     // Capture employee ID and Name when Delete button clicked
     const confirmDeleteModal = document.getElementById('confirmDeleteModal');
     confirmDeleteModal.addEventListener('show.bs.modal', function (event) {
-        const button = event.relatedTarget; // Button that triggered the modal
-        const empId = button.getAttribute('data-id'); // Employee ID
-        const empName = button.getAttribute('data-name'); // Employee Name
+        const button = event.relatedTarget;
+        const empId = button.getAttribute('data-id');
+        const empName = button.getAttribute('data-name');
 
-        // Update message dynamically
-        const deleteMessage = document.getElementById('deleteMessage');
-        deleteMessage.textContent = "Are you sure you want to delete " + empName + "?";
+        document.getElementById('deleteMessage').textContent =
+            "Are you sure you want to delete " + empName + "?";
 
-        // Update delete link dynamically
-        const confirmBtn = document.getElementById('confirmDeleteBtn');
-        confirmBtn.href = "/delete/" + empId;
+        document.getElementById('confirmDeleteBtn').href = "/delete/" + empId;
     });
 </script>
 
