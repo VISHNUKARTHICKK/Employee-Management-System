@@ -44,7 +44,6 @@ public class EmployeeService {
     public void delete(Long id, ModelMap map) {
         repository.deleteById(id);
           map.put("pass", id +" details deleted successfully");
-
     }
 
 
